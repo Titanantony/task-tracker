@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { axiosInstance } from "./config/axios";
+import { useEffect, useState } from "react";
+import { Message } from "./components/Msg";
 
 function App() {
+  const [message, setMessage] = useState("No message");
+  useEffect(() => {
+    async function fetchMessage() {
+      try {
+        const res = await axiosInstance("http://localhost:5000/msg");
+        console.log(res.data);
+        setMessage(res.data.message);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchMessage();
+  }, [message]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Message message={message} color={"green"} />
+      <Message message="Buy world" color={"blue"} />
     </div>
   );
 }
