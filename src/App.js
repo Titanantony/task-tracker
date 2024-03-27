@@ -1,6 +1,7 @@
 import { axiosInstance } from "./config/axios";
 import { useEffect, useState } from "react";
 import { Message } from "./components/Msg";
+import Header from "./components/Header";
 
 function App() {
   const [message, setMessage] = useState("No message");
@@ -20,8 +21,9 @@ function App() {
 
   return (
     <div className="container">
-      <Message message={message} color={"green"} />
-      <Message message="Buy world" color={"blue"} />
+      {/* <Message message={message} color={"green"} />
+      <Message message="Buy world" color={"blue"} /> */}
+      <Header title="Task Tracker" />
     </div>
   );
 }
